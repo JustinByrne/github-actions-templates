@@ -1,0 +1,25 @@
+name: deploy to forge
+
+on:
+  pull_request:
+    types:
+      - closed
+    branches:
+      - main
+
+jobs:
+  # This job can be created for each type of deployment
+  # e.g. production, staging
+  deploy_production:
+    runs-on: ubuntu-latest
+
+    # To ensure only select servers are deployed to this can
+    # change depending on branch
+    if: ${{ github.ref == 'main' }}
+
+    # This step can be added as many times as needed for each server
+    steps:
+      - name: Deploy to production
+        uses: jbrooksuk/laravel-forge-action@v1.0.2
+        with:
+          trigger_url: ${{ secrets.FORGE_TRIGGER_URL }}
