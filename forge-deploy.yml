@@ -15,7 +15,7 @@ jobs:
 
     # To ensure only select servers are deployed to this can
     # change depending on branch
-    if: ${{ github.ref == 'main' }}
+    if: contains(github.ref, 'main')
 
     # This step can be added as many times as needed for each server
     steps:
